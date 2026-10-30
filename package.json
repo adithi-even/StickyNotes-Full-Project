@@ -1,0 +1,30 @@
+{
+  "name": "soft-sticky-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline-first sticky notes for Windows, installable mobile web app, and temporary two-person chat.",
+  "main": "desktop/src/main.js",
+  "scripts": {
+    "desktop": "electron .",
+    "desktop:dist": "electron-builder --win",
+    "chat": "node chat-server/server.js",
+    "web": "vite --config web/vite.config.js",
+    "web:build": "vite build --config web/vite.config.js",
+    "check": "node --check desktop/src/main.js && node --check desktop/src/preload.js && node --check desktop/src/renderer.js && node --check chat-server/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.0.5"
+  },
+  "build": {
+    "appId": "com.softstickynotes.desktop",
+    "productName": "Soft Sticky Notes",
+    "directories": { "output": "release" },
+    "files": ["desktop/src/**/*", "chat-server/**/*", "package.json", "node_modules/ws/**/*"],
+    "win": { "target": ["nsis"] }
+  }
+}

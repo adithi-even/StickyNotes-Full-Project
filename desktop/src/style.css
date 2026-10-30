@@ -1,0 +1,376 @@
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0
+}
+
+body {
+    font: 14px/1.5 "Segoe UI", sans-serif;
+    color: #554955;
+    background: transparent;
+    overflow: hidden
+}
+
+.titlebar {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 9px 0 12px;
+    -webkit-app-region: drag;
+    background: rgba(255, 246, 250, .88);
+    border-bottom: 1px solid rgba(120, 92, 116, .12)
+}
+
+.titlebar button,
+.titlebar select {
+    -webkit-app-region: no-drag
+}
+
+.titlebar select {
+    max-width: 185px;
+    min-width: 70px;
+    flex: 0 1 auto;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #665666;
+    font-size: 12px;
+    padding: 5px
+}
+
+.round-btn {
+    border: 0;
+    background: rgba(255, 255, 255, .42);
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #745d70
+}
+
+.round-btn:hover {
+    background: rgba(255, 255, 255, .85)
+}
+
+.grow {
+    flex: 1
+}
+
+main {
+    height: calc(100% - 38px);
+    display: flex;
+    flex-direction: column;
+    padding: 14px 17px 10px;
+    background: rgba(255, 246, 250, .88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, .34);
+    border-top: 0;
+    border-radius: 0 0 18px 18px
+}
+
+#noteTitle {
+    font-size: 19px;
+    font-weight: 600;
+    color: #574958;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 3px 0 10px
+}
+
+#editor {
+    flex: 1;
+    overflow: auto;
+    outline: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #5d5260;
+    font-size: 14px;
+    line-height: 1.7
+}
+
+#editor:empty:before {
+    content: attr(data-placeholder);
+    color: rgba(100, 82, 102, .48);
+    pointer-events: none
+}
+
+#editor .image-wrap {
+    display: inline-block;
+    position: relative;
+    resize: both;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 70px;
+    min-height: 50px;
+    width: 240px;
+    height: 160px;
+    vertical-align: middle;
+    margin: 8px 8px 8px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(160, 125, 153, .18);
+    background: rgba(255, 255, 255, .25)
+}
+
+#editor .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none
+}
+
+#editor .file-chip {
+    display: inline-block;
+    padding: 4px 9px;
+    margin: 3px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .55);
+    border: 1px solid rgba(160, 125, 153, .2);
+    font-size: 12px;
+    cursor: pointer
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(91, 75, 91, .55);
+    font-size: 10px;
+    padding-top: 6px
+}
+
+.popover,
+.chat-popover {
+    position: absolute;
+    z-index: 20;
+    right: 10px;
+    top: 43px;
+    width: 290px;
+    padding: 13px;
+    border: 1px solid rgba(166, 132, 158, .22);
+    border-radius: 17px;
+    background: rgba(255, 252, 254, .97);
+    box-shadow: 0 10px 35px rgba(85, 57, 83, .18);
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.hidden {
+    display: none !important
+}
+
+.panel-title {
+    font-size: 14px;
+    font-weight: 650;
+    color: #765c72;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.panel-title .x-btn {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .75);
+    color: #765c72;
+    cursor: pointer
+}
+
+.panel-title .x-btn:hover {
+    background: #f2e8f0
+}
+
+.setting-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 48px;
+    gap: 6px;
+    align-items: center;
+    font-size: 11px
+}
+
+.setting-row input[type=color] {
+    width: 32px;
+    height: 25px;
+    border: 0;
+    background: transparent;
+    grid-column: 2
+}
+
+.setting-row input[type=range] {
+    width: 100px
+}
+
+.setting-row strong {
+    font-size: 10px;
+    color: #8b7185;
+    text-align: right
+}
+
+.setting-row select {
+    grid-column: 2/4;
+    border: 1px solid #eadfe8;
+    border-radius: 8px;
+    background: white;
+    padding: 5px;
+    color: #6b5968;
+    font-size: 11px
+}
+
+.swatches {
+    display: flex;
+    gap: 8px
+}
+
+.swatches button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(100, 70, 95, .2);
+    cursor: pointer
+}
+
+.panel-actions {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap
+}
+
+.panel-actions button,
+.chat-popover button {
+    border: 1px solid #eadde7;
+    background: #fff;
+    border-radius: 9px;
+    padding: 7px 9px;
+    font-size: 11px;
+    color: #715b6d;
+    cursor: pointer
+}
+
+.popover small,
+.chat-popover small {
+    font-size: 10px;
+    color: #a18c9e
+}
+
+.chat-popover {
+    width: 300px;
+    touch-action: none
+}
+
+.chat-head {
+    user-select: none
+}
+
+.chat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #765c72
+}
+
+.x-btn {
+    font-size: 18px !important;
+    border: 0 !important;
+    padding: 0 5px !important
+}
+
+.chat-welcome p {
+    font-size: 12px
+}
+
+.chat-welcome>button {
+    width: 100%
+}
+
+.join-row,
+.send-row {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px
+}
+
+.join-row input,
+.send-row input {
+    min-width: 0;
+    flex: 1;
+    border: 1px solid #eadde7;
+    border-radius: 9px;
+    padding: 8px;
+    font-size: 12px;
+    outline: 0
+}
+
+.room-line {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px
+}
+
+.room-line button {
+    margin-left: auto
+}
+
+.messages {
+    height: 210px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 8px 2px
+}
+
+.message {
+    max-width: 88%;
+    padding: 7px 10px;
+    border-radius: 12px;
+    background: #f6edf4;
+    font-size: 12px;
+    overflow-wrap: anywhere
+}
+
+.message.mine {
+    align-self: flex-end;
+    background: #e8f4ec
+}
+
+.leave-btn {
+    margin-top: 8px;
+    width: 100%
+}
+
+.attach-chat {
+    border: 1px solid #eadde7;
+    background: #fff;
+    border-radius: 9px;
+    padding: 6px 9px;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.customize-btn {
+    -webkit-app-region: no-drag;
+    border: 1px solid rgba(170, 130, 158, .22);
+    background: rgba(255, 255, 255, .58);
+    border-radius: 12px;
+    padding: 5px 9px;
+    font-size: 11px;
+    color: #745d70;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.customize-btn:hover {
+    background: rgba(255, 255, 255, .92)
+}

@@ -1,0 +1,201 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f9eef5, #edf5ff);
+    font: 15px "Segoe UI", sans-serif;
+    color: #655568;
+    padding: 18px
+}
+
+#app {
+    max-width: 720px;
+    margin: 0 auto
+}
+
+header,
+.top,
+.tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px
+}
+
+header {
+    padding: 12px 4px;
+    font-weight: 650
+}
+
+button,
+.upload {
+    border: 1px solid #eadde7;
+    background: #fff;
+    border-radius: 12px;
+    padding: 9px 13px;
+    color: #765f73;
+    cursor: pointer
+}
+
+main {
+    margin-top: 16px;
+    padding: 20px;
+    border: 1px solid #fff;
+    background: rgba(255, 250, 253, .83);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    box-shadow: 0 12px 38px #745d7018;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column
+}
+
+#title {
+    width: 100%;
+    font-size: 22px;
+    font-weight: 650;
+    border: 0;
+    background: transparent;
+    outline: 0;
+    color: inherit
+}
+
+#editor {
+    flex: 1;
+    min-height: 55vh;
+    outline: 0;
+    padding: 15px 0;
+    line-height: 1.7;
+    overflow-wrap: anywhere
+}
+
+#editor:empty:before {
+    content: attr(data-placeholder);
+    color: #b5a5b4
+}
+
+.tools {
+    font-size: 11px;
+    color: #9c899a
+}
+
+#settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 14px
+}
+
+#settings.hidden {
+    display: none
+}
+
+#settings label {
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+#editor .image-wrap {
+    display: inline-block;
+    resize: both;
+    overflow: hidden;
+    width: 230px;
+    height: 150px;
+    max-width: 100%;
+    min-width: 70px;
+    min-height: 50px;
+    vertical-align: middle;
+    margin: 8px;
+    border-radius: 12px;
+    border: 1px solid #eadde7
+}
+
+#editor .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block
+}
+
+.upload {
+    font-size: 12px
+}
+
+.head-actions {
+    display: flex;
+    gap: 6px
+}
+
+.chat-card {
+    max-width: 720px;
+    margin: 10px auto 0;
+    background: rgba(255, 252, 254, .95);
+    border: 1px solid #eadde7;
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 8px 25px #745d7018
+}
+
+.chat-card.hidden {
+    display: none
+}
+
+.chat-title {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 650;
+    user-select: none;
+    touch-action: none;
+    cursor: move;
+}
+
+.chat-join {
+    display: flex;
+    gap: 6px;
+    margin: 9px 0
+}
+
+.chat-join input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #eadde7;
+    border-radius: 10px;
+    padding: 9px
+}
+
+#chatMessages {
+    height: 180px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.chat-message {
+    padding: 8px 10px;
+    background: #f6edf4;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 13px
+}
+
+.chat-message.mine {
+    align-self: flex-end;
+    background: #e8f4ec
+}
+
+.chat-attach {
+    border: 1px solid #eadde7;
+    border-radius: 10px;
+    padding: 7px 10px;
+    background: #fff
+}

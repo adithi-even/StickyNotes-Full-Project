@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Soft Sticky Notes</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="titlebar">
+    <select id="noteSelect" aria-label="Choose note"></select>
+    <button id="newNote" class="round-btn" title="New note">＋</button>
+    <button id="deleteNote" class="round-btn" title="Delete note">⌫</button>
+    <button id="settingsToggle" class="customize-btn" title="Customize notepad">☼ Customize</button>
+    <button id="chatToggle" class="round-btn" title="Temporary chat">♡</button>
+    <span class="grow"></span>
+  </header>
+  <section id="settingsPanel" class="popover hidden">
+    <div class="panel-title"><span>Customize your notepad</span><button id="settingsClose" class="x-btn" type="button" aria-label="Close customization">×</button></div>
+    <div class="setting-row"><label for="tintColor">Background colour</label><input id="tintColor" type="color" value="#fff6fa"><strong id="hexValue">#FFF6FA</strong></div>
+    <div class="setting-row"><label for="textColor">Text colour</label><input id="textColor" type="color" value="#5d5260"><strong id="textHexValue">#5D5260</strong></div>
+    <div class="swatches">
+      <button data-color="#FFF6FA" style="background:#FFF6FA" title="Blush"></button>
+      <button data-color="#F2EEFF" style="background:#F2EEFF" title="Lilac"></button>
+      <button data-color="#EFFFF5" style="background:#EFFFF5" title="Mint"></button>
+      <button data-color="#FFF0E5" style="background:#FFF0E5" title="Peach"></button>
+      <button data-color="#EAF4FF" style="background:#EAF4FF" title="Sky"></button>
+      <button data-color="#F5F0E8" style="background:#F5F0E8" title="Oat"></button>
+    </div>
+    <div class="setting-row"><label for="opacity">Transparency</label><input id="opacity" type="range" min="15" max="98" value="88"><strong id="opacityValue">88%</strong></div>
+    <div class="setting-row"><label for="fontChoice">Writing style</label><select id="fontChoice"><option value="rounded">Rounded</option><option value="handwritten">Handwritten</option><option value="clean">Clean</option></select></div>
+    <div class="setting-row"><label for="fontSize">Text size</label><input id="fontSize" type="range" min="12" max="22" value="14"><strong id="fontSizeValue">14</strong></div>
+    <div class="setting-row"><label for="cornerRadius">Corner softness</label><input id="cornerRadius" type="range" min="8" max="30" value="18"><strong id="radiusValue">18</strong></div>
+    <div class="panel-actions"><button id="insertFile">Insert image / file</button><button id="storageButton">Storage folder</button><button id="resetTheme">Set to Default</button></div>
+    <small>Changes preview instantly and are saved on this device.</small>
+  </section>
+  <section id="chatPanel" class="chat-popover hidden">
+    <div class="chat-head"><b>Little chat</b><button id="chatClose" class="x-btn">×</button></div>
+    <div id="chatWelcome" class="chat-welcome">
+      <p>Send a little invitation to chat 💌</p>
+      <button id="createRoom">Create a chat room</button>
+      <div class="join-row"><input id="joinCode" placeholder="Room code"><button id="joinRoom">Join</button></div>
+      <small id="chatStatus">Chat needs an internet connection.</small>
+    </div>
+    <div id="chatActive" class="hidden">
+      <div class="room-line">Room <b id="roomCode"></b><button id="copyInvite">Copy invite</button></div>
+      <div id="messages" class="messages"></div>
+      <div class="send-row"><label class="attach-chat" title="Send image">＋<input id="chatImage" type="file" accept="image/*" hidden></label><input id="messageInput" placeholder="Write a message…"><button id="sendMessage">➤</button></div>
+      <button id="leaveRoom" class="leave-btn">End chat</button>
+    </div>
+  </section>
+  <main id="noteSurface">
+    <input id="noteTitle" placeholder="A little note…" maxlength="120" aria-label="Note title">
+    <div id="editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Write something lovely…"></div>
+    <footer><span id="saveStatus">Saved on this device</span><span id="charCount"></span></footer>
+  </main>
+  <script src="renderer.js"></script>
+</body></html>

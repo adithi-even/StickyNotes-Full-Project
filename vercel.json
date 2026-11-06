@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/chat/:code", "destination": "/index.html" }]
+}

@@ -1,0 +1,30 @@
+diff --git a/chat-server/server.js b/chat-server/server.js
+index 21aa260..121de57 100644
+--- a/chat-server/server.js
++++ b/chat-server/server.js
+@@ -4,6 +4,7 @@ const crypto = require('crypto');
+ 
+ const PORT = Number(process.env.PORT || 8787);
+ const ROOM_TTL_MS = 30 * 60 * 1000;
++const MAX_ROOM_SIZE = Number(process.env.MAX_ROOM_SIZE || 10);
+ const rooms = new Map();
+ const server = http.createServer((req, res) => {
+   res.writeHead(200, { 'content-type': 'application/json' });
+@@ -41,7 +42,7 @@ wss.on('connection', ws => {
+       const roomCode = String(m.room || '').toUpperCase().replace(/[^A-F0-9]/g,'');
+       const room = rooms.get(roomCode);
+       if (!room || room.expires < Date.now()) { rooms.delete(roomCode); return send(ws,{type:'error',message:'Room not found or expired.'}); }
+-      if (room.clients.size >= 2) return send(ws,{type:'error',message:'This room already has two people.'});
++      if (room.clients.size >= MAX_ROOM_SIZE) return send(ws,{type:'error',message:'This room is full.'});
+       if (ws.roomCode) removeClient(ws);
+       room.clients.add(ws); room.expires = Date.now() + ROOM_TTL_MS; ws.roomCode = roomCode;
+       send(ws,{type:'joined',room:roomCode});
+diff --git a/vercel.json b/vercel.json
+new file mode 100644
+index 0000000..e3a6a44
+--- /dev/null
++++ b/vercel.json
+@@ -0,0 +1,3 @@
++{
++  "rewrites": [{ "source": "/chat/:code", "destination": "/index.html" }]
++}
